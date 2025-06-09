@@ -1,0 +1,37 @@
+import java.util.*;
+public class BFSList{
+    public static void bfs(List<List<Integer>> graph,int start){
+        int n=graph.size();
+        boolean[] visited=new boolean[n];
+        Queue<Integer>queue=new LinkedList<>();
+        visited[start]=true;
+        queue.offer(start);
+        while(!queue.isEmpty()){
+            int current=queue.poll();
+            System.out.println(current+" ");
+            for(int neighbour:graph.get(current)){
+                if(!visited[neighbour]){
+                    visited[neighbour]=true;
+                    queue.offer(neighbour);
+                }
+            }
+        }
+    }
+    public static void main(String[] args){
+        int n=4;
+        List<List<Integer>>adjList=new ArrayList<>();
+        for(int i=0;i<n;i++){
+           adjList.add(new ArrayList<>()); 
+        }
+        adjList.get(0).add(1);
+        adjList.get(0).add(2);
+        adjList.get(1).add(0);
+        adjList.get(1).add(3);
+        adjList.get(2).add(0);
+        adjList.get(2).add(3);
+        adjList.get(3).add(1);
+        adjList.get(3).add(2);
+        System.out.println("BFS starting from node 0:");
+        bfs(adjList,0);
+    }
+}
